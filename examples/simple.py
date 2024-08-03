@@ -5,9 +5,13 @@ from datetime import datetime
 from pytonconnect import TonConnect
 from pytonconnect.exceptions import UserRejectsError
 
+import sys
+
 
 async def main():
-    connector = TonConnect(manifest_url='https://raw.githubusercontent.com/XaBbl4/pytonconnect/main/pytonconnect-manifest.json')
+    m_url = "https://testing.universalphone.xyz/np1/videos/tonconnect-manifest.json"
+    #connector = TonConnect(manifest_url='https://raw.githubusercontent.com/XaBbl4/pytonconnect/main/pytonconnect-manifest.json')
+    connector = TonConnect(manifest_url=m_url)
     is_connected = await connector.restore_connection()
     print('is_connected:', is_connected)
 
@@ -23,7 +27,7 @@ async def main():
     wallets_list = connector.get_wallets()
     print('wallets_list:', wallets_list)
     
-    generated_url = await connector.connect(wallets_list[0])
+    generated_url = await connector.connect(wallets_list[1])
     print('generated_url:', generated_url)
 
     print('Waiting 2 minutes to connect...')

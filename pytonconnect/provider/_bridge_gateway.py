@@ -64,7 +64,7 @@ class BridgeGateway:
         if not resolve.done():
             resolve.set_result(False)
 
-    async def register_session(self, timeout=5) -> bool:
+    async def register_session(self, timeout=120) -> bool:
         if self._is_closed:
             return False
 
@@ -90,7 +90,7 @@ class BridgeGateway:
         bridge_url += f'&ttl={ttl if ttl else self.DEFAULT_TTL}'
         bridge_url += f'&topic={topic}'
         async with ClientSession() as session:
-            await session.post(bridge_url, data=request, headers={'Content-type': 'text/plain;charset=UTF-8'}):
+            await session.post(bridge_url, data=request, headers={'Content-type': 'text/plain;charset=UTF-8'})
 
     def pause(self):
         if self._handle_listen is not None:
